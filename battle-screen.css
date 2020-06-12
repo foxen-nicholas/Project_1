@@ -1,0 +1,96 @@
+html,body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 1em;
+  text-align: center;
+  background-color: black;
+  /* background-image: url('../img/dungeonhell.png'); */
+  background-size: cover;
+  background-repeat: space;
+}
+
+h1, h2 {
+  font-family: Arial, Helvetica, sans-serif1;
+  color: goldenrod;
+}
+
+canvas {
+  /* background-image: url('../img/stone.png'); */
+  /* background-repeat: repeat; */
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+}
+
+#container {
+justify-content: center;
+background-color: rgb(111, 12, 32);
+margin: 0 auto;
+padding: 1em;
+display: grid;
+grid-template-rows: .5fr 1fr 1fr .5fr;
+grid-template-columns: 1fr 1 fr;
+grid-template-areas: "a b"
+                     "c d"
+                     "e f"
+                     "g h";
+}
+
+.battle-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#enemyHealth {
+  border: 1px solid black;
+  grid-area: a;
+}
+
+#enemyMana {
+  border: 1px solid black;
+  grid-area: b;
+  /* background-image: url('../img/funky-lines.png'); */
+}
+ #enemyActionText {
+   border: 1px solid black;
+   grid-area: c;
+ }
+
+#enemyImage {
+  border: 1px solid black;
+  grid-area: d;
+}
+
+#heroImage {
+  border: 1px solid black;
+  grid-area: e;
+}
+
+#heroActionText {
+  border: 1px solid black;
+  grid-area: f;
+}
+
+#heroStatus {
+  display: inline;
+  border: 1px solid black;
+  grid-area: g;
+}
+ #heroActionList {
+    border: 1px solid black;
+    grid-area: h;
+ }
+
+
+img {
+  height: 180px;
+  width: 300px;
+}
+
+.actionList {
+ width: 100px;
+}
