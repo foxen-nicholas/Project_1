@@ -1,18 +1,3 @@
-// enemy = {
-//   alive: true
-// }
-
-// item1 = {
-//   alive: true
-// }
-
-// item2 = {
-//   alive: true
-// }
-
-// item3 = {
-//   alive: true
-// }
 
 /*------ DOM References -------*/
 // movement display
@@ -26,7 +11,8 @@ game.height = 400;
 
 let ctx = game.getContext("2d");
 
-
+let counter = 0;
+document.getElementById("itemCounter").innerText = `${counter} items found!`
 
 /* ------- Dramatis Personae ------- */
 // Constructor function below
@@ -58,9 +44,13 @@ const gameTick = () => {
   // check if ogre is allive
   // if alive, render ogre
   // TODO: CLEAN THIS UP!!
+  if (item1.alive){
+  item1.render();
+}
   if (enemy.alive) {
     // check for colision
     detectEnemyHit()
+    detectItem1Hit();
   } else {
 
     setInterval(loadEncounter, 2000);
@@ -69,7 +59,7 @@ const gameTick = () => {
   // render our crawlers
   hero.render();
   enemy.render();
-  item1.render();
+  
   item2.render();
   item3.render();
 }
@@ -84,14 +74,24 @@ const detectEnemyHit = () => {
     && hero.x < enemy.x + enemy.width
     && hero.y < enemy.y + enemy.height
     && hero.y + hero.height > enemy.y) {
-      enemy.alive = false;
-      // change game message
+    enemy.alive = false;
+    // change game message
     gameStory.innerText = "An enemy approaches!!"
   } 
 }
 
 const detectItem1Hit = () => {
-  
+  if (hero.x + hero.width > item1.x
+  && hero.x < item1.x + item1.width
+  && hero.y < enemy.y + item1.height
+  && hero.y + hero.height > item1.y) {
+    item1.alive = false;
+    ctx.clearRect(200, 100, 64, 64)
+    
+    gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
+    counter ++;
+    updateCounter();
+  }
 }
 
 const loadEncounter = () => {
@@ -124,3 +124,7 @@ const movementHandler = (e) => {
 }
 
 document.addEventListener("keydown", movementHandler);
+
+const updateCounter = () => {
+  document.getElementById("itemCounter").innerText = `${counter} items found!`
+}
