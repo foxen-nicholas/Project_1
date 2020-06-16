@@ -93,6 +93,9 @@ const heroAttack = () => {
     heroAttackDamageTextToSelf();
     attackActionTextCleared = setTimeout(clearHeroActionText, 2000);
     heroAlive();
+    enemyAttackActionText = setTimeout(enemyAttackAction, 2500);
+    console.log(hero.health);
+    setTimeout(heroAlive, 2500);
   }
 }
 // Base magic modifier that either hits the enemy or the hero because of low % miscast
