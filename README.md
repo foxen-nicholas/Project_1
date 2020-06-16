@@ -23,6 +23,7 @@ I wanted to take the base dungeon crawler we were working on in class but add so
 3. Add animations.
 4. Add hero sprites.
 5. Add sounds for when actions happen.
+6. Add music.
 
 *** Resources ***
 1. Base canvas crawler from code along in class
