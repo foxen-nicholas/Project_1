@@ -84,12 +84,15 @@ const heroAttack = () => {
     heroAttackDamageText();
     attackActionTextCleared = setTimeout(clearHeroActionText, 2000);
     enemyAlive();
-    enemyAttackAction();
-    return attack;
+    enemyAttackActionText = setTimeout(enemyAttackAction, 2500);
+    console.log(hero.health);
+    setTimeout(heroAlive, 2500);
+    
   } else {
     console.log(attack);
     heroAttackDamageTextToSelf();
     attackActionTextCleared = setTimeout(clearHeroActionText, 2000);
+    heroAlive();
   }
 }
 // Base magic modifier that either hits the enemy or the hero because of low % miscast
@@ -130,6 +133,9 @@ const heroMagic = () => {
     heroMagicDamageText();
     magicActionTextCleared = setTimeout(clearHeroActionText, 2000);
     enemyAlive();
+    enemyAttackActionText = setTimeout(enemyAttackAction, 2000);
+    console.log(hero.health);
+    setTimeout(heroAlive, 2500);
     return magic;
     }
   } else {
@@ -137,6 +143,10 @@ const heroMagic = () => {
     updateHeroMana();
     heroMagicDamageTextToSelf();
     magicActionTextCleared = setTimeout(clearHeroActionText, 2000);
+    enemyAlive();
+    enemyAttackActionText = setTimeout(enemyAttackAction, 2000);
+    console.log(hero.health);
+    setTimeout(heroAlive, 2500);
     return magic;
   }
 
@@ -153,6 +163,10 @@ const heroRest = () => {
     hero.mana = baseMana;
   }
   updateHeroStatus();
+  enemyAlive();
+  enemyAttackActionText = setTimeout(enemyAttackAction, 2000);
+  console.log(hero.health);
+  setTimeout(heroAlive, 2500);
   console.log(hero.health);
 }
 
@@ -253,9 +267,17 @@ const heroAlive = () => {
   if (hero.health <= 0) {
     hero.alive = false;
     console.log(hero.alive)
+    heroBeaten = setInterval(heroDeadText, 2200);
+    loadLoseScreen = setInterval(loseScreen, 4000);
   }
 }
 
+const heroDeadText = () => {
+  document.getElementById("heroActionText").innerText = "You have been beaten by the enemy!"
+}
+const loseScreen = () => {
+  window.location = "lose-screen.html"
+}
 const winScreen = () => {
   window.location = "win-screen.html";
 }

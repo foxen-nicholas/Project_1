@@ -1,4 +1,3 @@
-
 /*------ DOM References -------*/
 // movement display
 let movementDisplay = document.getElementById("movement");
@@ -11,8 +10,8 @@ game.height = 400;
 
 let ctx = game.getContext("2d");
 
-let counter = 0;
-document.getElementById("itemCounter").innerText = `${counter} items found!`
+// let counter = 0;
+// document.getElementById("itemCounter").innerText = `${counter} items found!`
 
 /* ------- Dramatis Personae ------- */
 // Constructor function below
@@ -88,8 +87,6 @@ const detectItem1Hit = () => {
     item1.alive = false;
     ctx.clearRect(200, 100, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
-    counter ++;
-    updateCounter();
   }
 }
 const detectItem2Hit = () => {
@@ -100,8 +97,6 @@ const detectItem2Hit = () => {
     item2.alive = false;
     ctx.clearRect(650, 300, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
-    counter ++;
-    updateCounter();
   }
 }
 
@@ -113,8 +108,6 @@ const detectItem3Hit = () => {
     item3.alive = false;
     ctx.clearRect(700, 50, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
-    counter ++;
-    updateCounter();
   }
 }
 const loadEncounter = () => {
@@ -148,6 +141,6 @@ const movementHandler = (e) => {
 
 document.addEventListener("keydown", movementHandler);
 
-const updateCounter = () => {
-  document.getElementById("itemCounter").innerText = `${counter} items found!`
-}
+// // const updateCounter = () => {
+//   document.getElementById("itemCounter").innerText = `${counter} items found!`
+// }
