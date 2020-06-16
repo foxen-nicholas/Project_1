@@ -1,24 +1,18 @@
-// let hero = {
-//   level: 1,
-//   health: 50
+// enemy = {
+//   alive: true
 // }
 
-// let baseAttack = hero.level;
-
-// const attackModifier = () => {
-//   let moddedAttack = Math.floor(Math.random() * 10);
-//   return moddedAttack;
+// item1 = {
+//   alive: true
 // }
 
-// const heroAttack = () => {
-//   let attack = baseAttack + attackModifier();
-//   return attack;
+// item2 = {
+//   alive: true
 // }
 
-// console.log(heroAttack());
-
-
-
+// item3 = {
+//   alive: true
+// }
 
 /*------ DOM References -------*/
 // movement display
@@ -49,53 +43,59 @@ function Crawler(x, y, color, width, height) {
   }
 }
 
-let hero = new Crawler(0, 0, "hotpink", 40, 50);
-hero.catchySlogan = "You're anout to become french onion soup";
-let ogre = new Crawler(500, 100, "#bada55", 150, 200);
-
+let hero = new Crawler(0, 0, "hotpink", 64, 64);
+let enemy = new Crawler(500, 100, "#bada55", 150, 200);
+let item1 = new Crawler(200, 100, "blue", 64, 64);
+let item2 = new Crawler(300, 300, "red", 64, 64);
+let item3 = new Crawler(700, 50, "yellow", 64, 64);
 /*--------- Game Loop stuffs -------*/
 
 const gameTick = () => {
   // Clear the canvas
   ctx.clearRect(0, 0, game.width, game.height);
-  movementDisplay.innerText = `X:${hero.x} Y:${hero.x}`;
+  movementDisplay.innerText = `X:${hero.x} Y:${hero.y}`;
   // set or display hero x/y
   // check if ogre is allive
   // if alive, render ogre
   // TODO: CLEAN THIS UP!!
-  if (ogre.alive) {
+  if (enemy.alive) {
     // check for colision
-    detectHit()
+    detectEnemyHit()
   } else {
-    loadEncounter();
+
+    setInterval(loadEncounter, 2000);
   } 
   // else, vall end game
   // render our crawlers
   hero.render();
-  ogre.render();
+  enemy.render();
+  item1.render();
+  item2.render();
+  item3.render();
 }
 
-const detectHit = () => {
+const detectEnemyHit = () => {
   // if collision set ogre.alive = false;
   // if hero's right side is greater than ogre's left side
   // if hero's left side is less than ogre's right side
   // if hero's top is less than ogre's bottom
   // if hero's bottom is greater than ogre's top
-  if(hero.x + hero.width > ogre.x 
-    && hero.x < ogre.x + ogre.width
-    && hero.y < ogre.y + ogre.height
-    && hero.y + hero.height > ogre.y) {
-      ogre.alive = false;
+  if(hero.x + hero.width > enemy.x 
+    && hero.x < enemy.x + enemy.width
+    && hero.y < enemy.y + enemy.height
+    && hero.y + hero.height > enemy.y) {
+      enemy.alive = false;
       // change game message
-    gameStory.innerText = "A most bogus dude approaches!"
+    gameStory.innerText = "An enemy approaches!!"
   } 
-  // change game message
+}
 
+const detectItem1Hit = () => {
+  
 }
 
 const loadEncounter = () => {
-  clearInterval(gameLoop);
-  console.log("Time to fight!");
+  window.location = "battle-screen.html";
 }
 
 let gameLoop = setInterval(gameTick, 60);
