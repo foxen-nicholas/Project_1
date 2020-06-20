@@ -36,7 +36,7 @@ let enemyModdedAttack;
 document.getElementById("heroHealth").innerText = `Health: ${hero.health}`;
 document.getElementById("heroMana").innerText = `Mana: ${hero.mana}`;
 document.getElementById("enemyHealth").innerText = `Health: ${enemy.health}`;
-document.getElementById("enemyMana").innerText = `Mana: ${enemy.mana}`
+
 
 const enemyAttackModifier = () => {
   enemyModdedAttack = Math.floor(Math.random() * 10);
@@ -58,7 +58,6 @@ const enemyAttackAction = () => {
     enemyAttackActionTextCleared = setTimeout(clearEnemyActionText, 2000);
   }
 }
-
 
 
 // Create attack modifier with chance to hit self
@@ -84,18 +83,24 @@ const heroAttack = () => {
     heroAttackDamageText();
     attackActionTextCleared = setTimeout(clearHeroActionText, 2000);
     enemyAlive();
+    if(enemy.alive === false){
+      return} else {
     enemyAttackActionText = setTimeout(enemyAttackAction, 2500);
     console.log(hero.health);
     setTimeout(heroAlive, 2500);
-    
+    }
   } else {
     console.log(attack);
     heroAttackDamageTextToSelf();
     attackActionTextCleared = setTimeout(clearHeroActionText, 2000);
     heroAlive();
+    enemyAlive(); 
+    if(enemy.alive === false){
+      return} else {
     enemyAttackActionText = setTimeout(enemyAttackAction, 2500);
     console.log(hero.health);
     setTimeout(heroAlive, 2500);
+    }
   }
 }
 // Base magic modifier that either hits the enemy or the hero because of low % miscast
@@ -136,21 +141,28 @@ const heroMagic = () => {
     heroMagicDamageText();
     magicActionTextCleared = setTimeout(clearHeroActionText, 2000);
     enemyAlive();
+    if (enemy.alive === false) {
+      return
+    } else {
     enemyAttackActionText = setTimeout(enemyAttackAction, 2000);
     console.log(hero.health);
     setTimeout(heroAlive, 2500);
     return magic;
     }
+   }
   } else {
     hero.mana -= 7;
     updateHeroMana();
     heroMagicDamageTextToSelf();
     magicActionTextCleared = setTimeout(clearHeroActionText, 2000);
     enemyAlive();
+    if(enemy.alive === false){
+      return} else {
     enemyAttackActionText = setTimeout(enemyAttackAction, 2000);
     console.log(hero.health);
     setTimeout(heroAlive, 2500);
     return magic;
+  }
   }
 
 }

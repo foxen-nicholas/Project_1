@@ -10,8 +10,11 @@ game.height = 400;
 
 let ctx = game.getContext("2d");
 
-// let counter = 0;
-// document.getElementById("itemCounter").innerText = `${counter} items found!`
+let counter = 0;
+
+const updateCounter = () => {
+  document.getElementById("itemCounter").innerHTML =  `${counter} found!`
+}
 
 /* ------- Dramatis Personae ------- */
 // Constructor function below
@@ -22,6 +25,7 @@ function Crawler(x, y, color, width, height) {
   this.width = width;
   this.height = height;
   this.alive = true;
+  this.previous = null;
   this.render = function() {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -29,10 +33,10 @@ function Crawler(x, y, color, width, height) {
 }
 
 let hero = new Crawler(0, 0, "hotpink", 64, 64);
-let enemy = new Crawler(500, 100, "#bada55", 64, 64);
-let item1 = new Crawler(200, 100, "blue", 64, 64);
-let item2 = new Crawler(650, 300, "red", 64, 64);
-let item3 = new Crawler(700, 50, "yellow", 64, 64);
+let enemy = new Crawler(500, 100, "green", 64, 64);
+let item1 = new Crawler(200, 100, "#222", 64, 64);
+let item2 = new Crawler(650, 300, "#222", 64, 64);
+let item3 = new Crawler(700, 50, "#222", 64, 64);
 /*--------- Game Loop stuffs -------*/
 
 const gameTick = () => {
@@ -53,15 +57,17 @@ const gameTick = () => {
     item3.render();
   } if (enemy.alive) {
     // check for colision
-    detectEnemyHit();
     detectItem1Hit();
     detectItem2Hit();
     detectItem3Hit();
+    detectEnemyHit();
   } else {
 
     setInterval(loadEncounter, 2000);
   }
 }
+
+
 
 const detectEnemyHit = () => {
   // if collision set ogre.alive = false;
@@ -69,46 +75,69 @@ const detectEnemyHit = () => {
   // if hero's left side is less than ogre's right side
   // if hero's top is less than ogre's bottom
   // if hero's bottom is greater than ogre's top
-  if(hero.x + hero.width > enemy.x 
-    && hero.x < enemy.x + enemy.width
-    && hero.y < enemy.y + enemy.height
-    && hero.y + hero.height > enemy.y) {
-    enemy.alive = false;
-    // change game message
-    gameStory.innerText = "An enemy approaches!!"
-  } 
+  if (counter === 3){
+    if(hero.x + hero.width > enemy.x 
+      && hero.x < enemy.x + enemy.width
+      && hero.y < enemy.y + enemy.height
+      && hero.y + hero.height > enemy.y) {
+      enemy.alive = false;
+      // change game message
+      gameStory.innerText = "An enemy approaches!!"
+    } 
+  }
 }
 
 const detectItem1Hit = () => {
+
   if (hero.x + hero.width > item1.x
   && hero.x < item1.x + item1.width
-  && hero.y < enemy.y + item1.height
+  && hero.y < item1.y + item1.height
   && hero.y + hero.height > item1.y) {
     item1.alive = false;
-    ctx.clearRect(200, 100, 64, 64)
+    ctx.fillRect(1200, 100, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
   }
+ 
+  if(item1.previous === true && item1.alive === false) {
+    counter += 1;
+    updateCounter();
+    console.log(counter);
+  }
+  item1.previous = item1.alive;
 }
 const detectItem2Hit = () => {
+  
   if (hero.x + hero.width > item2.x
   && hero.x < item2.x + item2.width
-  && hero.y < enemy.y + item2.height
+  && hero.y < item2.y + item2.height
   && hero.y + hero.height > item2.y) {
     item2.alive = false;
-    ctx.clearRect(650, 300, 64, 64)
+    ctx.fillRect(1300, 300, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
   }
+  if (item2.previous === true && item2.alive === false) {
+    counter += 1;
+    updateCounter();
+    console.log(counter)
+  }
+  item2.previous = item2.alive;
 }
 
 const detectItem3Hit = () => {
   if (hero.x + hero.width > item3.x
   && hero.x < item3.x + item3.width
-  && hero.y < enemy.y + item3.height
+  && hero.y < item3.y + item3.height
   && hero.y + hero.height > item3.y) {
     item3.alive = false;
-    ctx.clearRect(700, 50, 64, 64)
+    ctx.fillRect(1300, 50, 64, 64)
     gameStory.innerText = "We found one of the 3 items need to battle the enemy!"
   }
+  if (item3.previous === true && item3.alive === false) {
+    counter += 1;
+    updateCounter();
+    console.log(counter)
+  }
+  item3.previous= item3.alive;
 }
 const loadEncounter = () => {
   window.location = "battle-screen.html";
@@ -141,6 +170,3 @@ const movementHandler = (e) => {
 
 document.addEventListener("keydown", movementHandler);
 
-// // const updateCounter = () => {
-//   document.getElementById("itemCounter").innerText = `${counter} items found!`
-// }
