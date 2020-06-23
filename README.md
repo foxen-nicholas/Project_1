@@ -13,6 +13,7 @@ I wanted to take the base dungeon crawler we were working on in class but add so
 5. Have a title screen, main canvas board game, battle screen, win screen, and lose screen.
 
 *** How it went ***
+
 Overall, i enjoyed this project a lot and will be continuing to work on this until I feel it is complete. The main reason for this is because I feel that by doing so I will continue to get a more indepth experience with these three languages. For example, while working on this game I learn how frustrating working with canvas can be, especially when you just want to get rid of what you already drew on your canvas board. Haha. Also, I can't wait to go back and style it!! I'm excited to make this a much better looking game while using what I know and what I will learn using HTML, CSS, and Javascript. The most difficult part so far with creating this game has been learning the canvas board and the logic needed to incorporate what I wanted for that screen. The easiest part so far for me was building the battle sceen and writing out that logic. I have played a tone of RPG's in my life and I already had a bit of an understanding of how I wanted to do that screen. Next step is to add more mechnics to the battle other than just attack, magic, and rest. Thank you for your time and enjoy!
 
 *** Instructions ***
